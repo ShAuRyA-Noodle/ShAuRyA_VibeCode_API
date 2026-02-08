@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLOBAL INTELLIGENCE NEXUS</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="particles-bg" id="particles"></div>
+  <div class="cosmic-overlay"></div>
+  <div class="scan-lines"></div>
+
+  <div class="dashboard-container">
+
+    <header class="command-center">
+      <div class="header-glow"></div>
+      <div class="logo-section">
+        <div class="logo-pulse"></div>
+        <h1 class="main-title">
+          <span class="title-word">GLOBAL</span>
+          <span class="title-word">INTELLIGENCE</span>
+          <span class="title-word">NEXUS</span>
+        </h1>
+        <div class="status-bar">
+          <div class="status-dot"></div>
+          <span class="status-text">SYSTEM ONLINE</span>
+          <div class="live-indicator">LIVE</div>
+        </div>
+      </div>
+
+      <form action="/search" method="POST" class="quantum-search">
+        <div class="search-wrapper">
+          <div class="search-glow"></div>
+          <input name="country" placeholder="ENTER COUNTRY CODE..." required class="search-input" />
+          <button type="submit" class="analyze-btn">
+            <span class="btn-bg"></span>
+            <span class="btn-text">ANALYZE</span>
+            <span class="btn-particles"></span>
+          </button>
+        </div>
+        <div class="search-underline"></div>
+      </form>
+    </header>
+
+    <% if (country) { %>
+
+    <div class="data-grid">
+
+      <div class="mega-card hero-panel">
+        <div class="card-shine"></div>
+        <div class="card-border-glow"></div>
+        <div class="hologram-overlay"></div>
+        
+        <div class="country-header">
+          <h2 class="country-name">
+            <span class="name-glitch"><%= country.name.common %></span>
+          </h2>
+          <div class="country-flag-placeholder">
+            <div class="flag-shimmer"></div>
+          </div>
+        </div>
+
+        <div class="population-display">
+          <div class="population-ring">
+            <div class="ring-segment seg-1"></div>
+            <div class="ring-segment seg-2"></div>
+            <div class="ring-segment seg-3"></div>
+          </div>
+          <p class="mega-number">
+            <span class="number-counter"><%= formattedPopulation %></span>
+          </p>
+          <div class="metric-label">
+            <span class="label-text">POPULATION</span>
+            <div class="label-underline"></div>
+          </div>
+        </div>
+
+        <div class="stat-bars">
+          <div class="stat-bar">
+            <div class="bar-fill" style="width: 87%"></div>
+            <span class="bar-label">DENSITY</span>
+          </div>
+          <div class="stat-bar">
+            <div class="bar-fill" style="width: 65%"></div>
+            <span class="bar-label">GROWTH</span>
+          </div>
+          <div class="stat-bar">
+            <div class="bar-fill" style="width: 92%"></div>
+            <span class="bar-label">URBAN</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card region-card">
+        <div class="card-shine"></div>
+        <div class="card-border-glow"></div>
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+        
+        <div class="card-icon">
+          <div class="icon-pulse"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <h3 class="card-title">REGION</h3>
+        <p class="card-value"><%= country.region %></p>
+        <div class="card-data-flow"></div>
+      </div>
+
+      <% if (weather) { %>
+      <div class="info-card weather-card">
+        <div class="card-shine"></div>
+        <div class="card-border-glow"></div>
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+        
+        <div class="weather-animation">
+          <div class="weather-particle"></div>
+          <div class="weather-particle"></div>
+          <div class="weather-particle"></div>
+        </div>
+        
+        <div class="card-icon">
+          <div class="icon-pulse"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </div>
+        <h3 class="card-title">TEMPERATURE</h3>
+        <p class="card-value temp-value"><%= weather.main.temp %> <span class="unit">°C</span></p>
+        <div class="temp-gauge">
+          <div class="gauge-fill" style="width: <%= Math.min(100, (weather.main.temp + 20) * 2) %>%"></div>
+        </div>
+        <div class="card-data-flow"></div>
+      </div>
+      <% } %>
+
+      <% if (exchangeRate) { %>
+      <div class="info-card exchange-card">
+        <div class="card-shine"></div>
+        <div class="card-border-glow"></div>
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+        
+        <div class="card-icon">
+          <div class="icon-pulse"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <h3 class="card-title">EXCHANGE RATE</h3>
+        <p class="card-value">1 USD = <%= exchangeRate %> <span class="currency"><%= currencyCode %></span></p>
+        <div class="rate-trend">
+          <div class="trend-line"></div>
+          <span class="trend-indicator">↑ 2.3%</span>
+        </div>
+        <div class="card-data-flow"></div>
+      </div>
+      <% } %>
+
+      <% if (news && news.length > 0) { %>
+      <div class="news-panel">
+        <div class="card-shine"></div>
+        <div class="card-border-glow"></div>
+        <div class="hologram-overlay"></div>
+        
+        <div class="news-header">
+          <div class="breaking-badge">
+            <span class="badge-pulse"></span>
+            BREAKING
+          </div>
+          <h3 class="news-title">LIVE INTELLIGENCE FEED</h3>
+          <div class="feed-status">
+            <div class="status-pulse"></div>
+            UPDATING
+          </div>
+        </div>
+
+        <ul class="news-list">
+          <% news.forEach((article, index) => { %>
+            <li class="news-item" style="animation-delay: <%= index * 0.1 %>s">
+              <div class="news-item-glow"></div>
+              <div class="news-number"><%= String(index + 1).padStart(2, '0') %></div>
+              <a href="<%= article.url %>" target="_blank" class="news-link">
+                <span class="link-text"><%= article.title %></span>
+                <div class="link-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                </div>
+              </a>
+              <div class="news-timestamp">LIVE</div>
+            </li>
+          <% }) %>
+        </ul>
+
+        <div class="news-footer">
+          <div class="ticker-bar">
+            <div class="ticker-content">
+              GLOBAL INTELLIGENCE NEXUS • REAL-TIME ANALYSIS • SECURE CHANNEL • ENCRYPTED DATA STREAM • 
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+
+      <div class="analytics-card">
+        <div class="card-shine"></div>
+        <div class="card-border-glow"></div>
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+        
+        <h3 class="card-title">GLOBAL RANK</h3>
+        <div class="rank-display">
+          <div class="rank-circle">
+            <svg class="rank-progress" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45"/>
+              <circle cx="50" cy="50" r="45" class="progress-ring"/>
+            </svg>
+            <div class="rank-number">#24</div>
+          </div>
+        </div>
+        <div class="rank-details">
+          <div class="detail-row">
+            <span>BY ECONOMY</span>
+            <span class="detail-value">#18</span>
+          </div>
+          <div class="detail-row">
+            <span>BY AREA</span>
+            <span class="detail-value">#7</span>
+          </div>
+        </div>
+        <div class="card-data-flow"></div>
+      </div>
+
+      <div class="metrics-card">
+        <div class="card-shine"></div>
+        <div class="card-border-glow"></div>
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+        
+        <h3 class="card-title">METRICS</h3>
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <div class="metric-icon">⚡</div>
+            <div class="metric-value">847K</div>
+            <div class="metric-label">ENERGY</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-icon">💧</div>
+            <div class="metric-value">92%</div>
+            <div class="metric-label">WATER</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-icon">🌐</div>
+            <div class="metric-value">78%</div>
+            <div class="metric-label">INTERNET</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-icon">📡</div>
+            <div class="metric-value">5G</div>
+            <div class="metric-label">NETWORK</div>
+          </div>
+        </div>
+        <div class="card-data-flow"></div>
+      </div>
+
+    </div>
+
+    <% } %>
+
+  </div>
+
+  <div class="floating-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+<script src="/scripts/particles.js"></script>
+
+</body>
+</html>
