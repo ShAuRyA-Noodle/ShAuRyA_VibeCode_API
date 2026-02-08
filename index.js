@@ -106,5 +106,13 @@ app.post("/search", async (req, res) => {
     }
 });
 
-/* IMPORTANT FOR VERCEL */
+/* START SERVER LOCALLY (NOT USED BY VERCEL) */
+if (process.env.NODE_ENV !== "production") {
+    const port = 3000;
+    app.listen(port, () => {
+        console.log(`Server running locally on port ${port}`);
+    });
+}
+
+/* EXPORT FOR VERCEL */
 export default app;
