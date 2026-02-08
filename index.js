@@ -4,15 +4,19 @@ dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 
-const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
-const NEWS_API_KEY = process.env.NEWS_API_KEY;
+/* IMPORTANT FOR VERCEL PATHS */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 function formatPopulation(num) {
     if (num >= 1_000_000_000) {
