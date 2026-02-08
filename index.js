@@ -9,15 +9,21 @@ import { fileURLToPath } from "url";
 
 const app = express();
 
+/* ENV VARIABLES */
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+const NEWS_API_KEY = process.env.NEWS_API_KEY;
+
 /* IMPORTANT FOR VERCEL PATHS */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/* FORMAT POPULATION */
 function formatPopulation(num) {
     if (num >= 1_000_000_000) {
         return (num / 1_000_000_000).toFixed(1) + " Billion";
@@ -31,10 +37,12 @@ function formatPopulation(num) {
     return num;
 }
 
+/* HOME */
 app.get("/", (req, res) => {
     res.render("index.ejs", { country: null });
 });
 
+/* SEARCH */
 app.post("/search", async (req, res) => {
     const countryName = req.body.country;
 
@@ -89,7 +97,12 @@ app.post("/search", async (req, res) => {
         });
 
     } catch (error) {
-        res.render("index.ejs", { country: null });
+        console.log(error.response?.data || error.message);
+
+        res.render("index.ejs", {
+            country: null,
+            error: "Failed to fetch data. Check API keys."
+        });
     }
 });
 
